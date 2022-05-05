@@ -23,8 +23,26 @@ if(isset($_POST['submit'])){
     $_SESSION['phone'] = $result['v_phone'];
     $_SESSION['age'] = $result['v_age'];
     $_SESSION['status'] = $result['v_status'];
+    $iduser = $result['v_id'];
+    $sql = "SELECT v_vaccine.v_id,v_vaccine.v_name,v_vaccine.v_effect,v_data.date1,v_data.date2 FROM v_data INNER JOIN v_vaccine ON v_data.v_idvaccine = v_vaccine.v_id WHERE v_iduser = '$iduser'";
+    $query = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_array($query);
+    if($result){
+        $_SESSION['idvaccine'] = $result['v_id'];
+        $_SESSION['statusdelectvaccine'] = true;
+        $_SESSION['vaccine'] = $result['v_name'];
+        $_SESSION['effect'] = $result['v_effect'];
+        $_SESSION['date1'] = $result['date1'];
+        $_SESSION['date2'] = $result['date2'];
+    }else{
+        $_SESSION['statusdelectvaccine'] = false;
+    }
+    if($_SESSION['status'] == 'admin'){
+        echo "<h4>Admin!!!!</h4>";
+        header('refresh:1;url=../vaccine/index.php?page=admin');
+    }else{
     header('refresh:1;url=../vaccine/index.php?page=vaccine');
-  
+    }
   }else{
     echo "<h4>Account is not found!</h4>";
     header('refresh:2;url=../vaccine/index.php?page=Login');
@@ -40,7 +58,8 @@ if(isset($_POST['submit'])){
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="image/banner.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;height:506px;">
+                            <img src="image/banner.jpg" alt="login form" class="img-fluid"
+                                style="border-radius: 1rem 0 0 1rem;height:506px;">
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
