@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2022 at 09:10 AM
+-- Generation Time: May 05, 2022 at 05:47 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `vaccine`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `v_data`
+--
+
+CREATE TABLE `v_data` (
+  `v_id` int(11) NOT NULL,
+  `v_iduser` int(11) NOT NULL,
+  `v_idvaccine` int(11) NOT NULL,
+  `v_amount` varchar(50) NOT NULL DEFAULT '2',
+  `date1` date NOT NULL,
+  `date2` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -45,7 +60,10 @@ CREATE TABLE `v_user` (
 
 INSERT INTO `v_user` (`v_id`, `v_fname`, `v_lname`, `v_email`, `v_age`, `v_sex`, `v_phone`, `v_password`, `v_status`) VALUES
 (1, 'Rattana', 'Chomwihok', 'rattana123zaja@gmail.com', '20', 'Female', '0917567541', '123456', 'admin'),
-(2, 'Rogi', 'BMTIO', 'member@gmail.com', '21', 'Female', '0970521284', '123456', 'member');
+(2, 'Rogi', 'BMTIO', 'member@gmail.com', '21', 'Female', '0970521284', '123456', 'member'),
+(3, 'Grand', 'pa', 'papa@gmail.com', '61', 'Female', '0970521285', '123456', 'member'),
+(4, 'child', 'pook', 'test@gmail.com', '16', 'Male', '091111521', '123456', 'member'),
+(5, 'Rogi', 'BMTIO', 'supermember@gmail.com', '30', 'Female', '09912345', '123456', 'member');
 
 -- --------------------------------------------------------
 
@@ -69,14 +87,22 @@ CREATE TABLE `v_vaccine` (
 --
 
 INSERT INTO `v_vaccine` (`v_id`, `v_name`, `v_effect`, `v_minage`, `v_amount`, `v_detail`, `v_seffects`, `v_producer`) VALUES
-(1, 'Shinovac', '49.6-50.7%', '18-60 ปี', '200', '2 โดส ห่างกัน 3 สัปดาห์', 'จุดที่ฉีด - ปวด\r\nร่างกาย - ปวดหัว, อาการชาคล้ายอัมพาต', 'ประเทศจีน'),
-(2, 'Shinopharm', '79.3 %', '18 ปีขึ้นไป', '200', '2 โดส ห่างกัน 3-4 สัปดาห์', 'จุดที่ฉีด - ปวด, บวม, แดง\r\nร่างกาย-ปวดหัว, ปวดกล้ามเนื้อ, ผื่นขึ้น, มีใข้', 'ประเทศจีน'),
-(3, 'Moderna', '94.1 %', '18 ปีขึ้นไป', '200', '2 โดส ห่างกัน 4 สัปดาห์', 'จุดที่ฉีด - ปวด, บวม, แดง\r\nร่างกาย - หนาวสั่น, ปวดหัว, อ่อนเพลีย', 'ประเทศสหัฐอเมริกา'),
-(4, 'Astra Zeneca', '70.4-82.4 % ', '18 ปีขึ้นไป', '200', '2 โดส ห่างกัน 4-12 สัปดาห์', 'จุดที่ฉีด - ปวด\r\nร่างกาย - หนาวสั่น, มีใข้, ปวดหัว, อ่อนเพลีย, ปวดกล้ามเนื้อ, คลื่นใส้, ลิ่มเลือดแข็', 'ประเทศสหัฐอเมริกา,ประเทศเยอรมัน');
+(1, 'Shinovac', '50%', '18-60 ปี', '198', '2 โดส ห่างกัน 3 สัปดาห์', 'จุดที่ฉีด - ปวด\r\nร่างกาย - ปวดหัว, อาการชาคล้ายอัมพาต', 'ประเทศจีน'),
+(2, 'Shinopharm', '79%', '18 ปีขึ้นไป', '196', '2 โดส ห่างกัน 3-4 สัปดาห์', 'จุดที่ฉีด - ปวด, บวม, แดง\r\nร่างกาย-ปวดหัว, ปวดกล้ามเนื้อ, ผื่นขึ้น, มีใข้', 'ประเทศจีน'),
+(3, 'Moderna', '94%', '18 ปีขึ้นไป', '200', '2 โดส ห่างกัน 4 สัปดาห์', 'จุดที่ฉีด - ปวด, บวม, แดง\r\nร่างกาย - หนาวสั่น, ปวดหัว, อ่อนเพลีย', 'ประเทศสหัฐอเมริกา'),
+(4, 'Astra Zeneca', '75% ', '18 ปีขึ้นไป', '200', '2 โดส ห่างกัน 4-12 สัปดาห์', 'จุดที่ฉีด - ปวด\r\nร่างกาย - หนาวสั่น, มีใข้, ปวดหัว, อ่อนเพลีย, ปวดกล้ามเนื้อ, คลื่นใส้, ลิ่มเลือดแข็', 'ประเทศสหัฐอเมริกา,ประเทศเยอรมัน');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `v_data`
+--
+ALTER TABLE `v_data`
+  ADD PRIMARY KEY (`v_id`),
+  ADD KEY `v_iduser` (`v_iduser`,`v_idvaccine`),
+  ADD KEY `v_idvaccine` (`v_idvaccine`);
 
 --
 -- Indexes for table `v_user`
@@ -95,16 +121,33 @@ ALTER TABLE `v_vaccine`
 --
 
 --
+-- AUTO_INCREMENT for table `v_data`
+--
+ALTER TABLE `v_data`
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `v_user`
 --
 ALTER TABLE `v_user`
-  MODIFY `v_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `v_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `v_vaccine`
 --
 ALTER TABLE `v_vaccine`
   MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `v_data`
+--
+ALTER TABLE `v_data`
+  ADD CONSTRAINT `v_data_ibfk_1` FOREIGN KEY (`v_iduser`) REFERENCES `v_user` (`v_id`),
+  ADD CONSTRAINT `v_data_ibfk_2` FOREIGN KEY (`v_idvaccine`) REFERENCES `v_vaccine` (`v_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
