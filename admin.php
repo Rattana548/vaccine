@@ -2,7 +2,7 @@
 
     require_once "conn/conn.php";
 
-    $sql = "SELECT v_data.v_amount,v_vaccine.v_id,v_vaccine.v_name,v_user.v_age,v_vaccine.v_effect,v_data.date1,v_data.date2,v_user.v_fname FROM v_data INNER JOIN v_vaccine ON v_data.v_idvaccine = v_vaccine.v_id INNER JOIN v_user ON v_data.v_iduser = v_user.v_id";
+    $sql = "SELECT v_data.v_dose1,v_data.v_dose2,v_user.v_id,v_data.v_amount,v_vaccine.v_name,v_user.v_age,v_vaccine.v_effect,v_data.date1,v_data.date2,v_user.v_fname FROM v_data INNER JOIN v_vaccine ON v_data.v_idvaccine = v_vaccine.v_id INNER JOIN v_user ON v_data.v_iduser = v_user.v_id";
     $query = mysqli_query($conn, $sql);
     $result_list = array();
     while($row = mysqli_fetch_array($query)) {
@@ -12,7 +12,7 @@
 
 
 <div class="container-lg" style="min-height:600px;padding-top:50px;">
-    <h1>Status Vaccine-19 ( สถาณะ วัคซีนโควิด-19 )</h1>
+    <h1>Status Vaccine-19 ( สถานะ วัคซีนโควิด-19 )</h1>
     <table class="table">
         <thead class="table-dark">
             <th>ชื่อ</th>
@@ -20,37 +20,58 @@
             <th>อายุ</th>
             <th>จำนวนโดส</th>
             <th>วัน เข็ม 1</th>
-            <th>ตัวเลือก</th>
+            <th style="width: 250px;">ตัวเลือก</th>
             <th>วัน เข็ม 2</th>
-            <th>ตัวเลือก</th>
+            <th style="width: 250px;">ตัวเลือก</th>
         </thead>
         <?php foreach ($result_list as $row){?>
         <tr>
-            <td><?= $result['v_fname']?></td>
-            <td><?= $result['v_name']?></td>
-            <td><?= $result['v_age']?></td>
-            <td><?= $result['v_amount']?></td>
-            <td><?= $result['date1']?></td>
+            <td><?= $row['v_fname']?></td>
+            <td><?= $row['v_name']?></td>
+            <td><?= $row['v_age']?></td>
+            <td><?= $row['v_amount']?></td>
+            <td><?= $row['date1']?></td>
             <td>
-                <form action="allow.php" method="POST" style="float: left;margin-right:10px;">
-                    <input type="text" class="btn btn-primary" name="id" value="" style="display:none;">
-                    <input type="submit" class="btn btn-primary" name="submit" value="อนุญาต">
+            <?php if($row['v_dose1'] == "ฉีดแล้ว"){ ?>
+                <?= $row['v_dose1']?>
+            <?php }else{?>
+                <form action="allow.php" method="post" style="float: left;margin-right:10px;">
+                    <input type="text" class="btn btn-outline-success" name="id" value="<?= $row['v_id']?>"
+                        style="display:none;">
+                    <input type="text" class="btn btn-outline-success" name="dose1" value="ฉีดแล้ว"
+                        style="display:none;">
+                    <input type="submit" class="btn btn-outline-success" name="submit" value="อนุญาต">
                 </form>
+                
                 <form action="delectvaccine.php" method="POST">
-                    <input type="text" class="btn btn-primary" name="id" value="" style="display:none;">
-                    <input type="submit" class="btn btn-primary" name="submit" value="ยกเลิกการจอง">
+                    <input type="text" class="btn btn-outline-danger" name="delect" value="<?= $row['v_id']?>"
+                        style="display:none;">
+                    <input type="submit" class="btn btn-outline-danger" name="submit" value="ยกเลิกการจอง">
                 </form>
+                <?php }?>
             </td>
-            <td><?= $result['date2']?></td>
+            <td><?= $row['date2']?></td>
             <td>
+            <?php if($row['v_dose2'] == "ฉีดแล้ว"){ ?>
+                            <?= $row['v_dose2']?>
+                            <?php }else{?>
                 <form action="allow.php" method="POST" style="float: left;margin-right:10px;">
-                    <input type="text" class="btn btn-primary" name="id" value="" style="display:none;">
-                    <input type="submit" class="btn btn-primary" name="submit" value="อนุญาต">
+                    <input type="text" class="btn btn-outline-success" name="id" value="<?= $row['v_id']?>"
+                        style="display:none;">
+                    <input type="text" class="btn btn-outline-success" name="dose2" value="ฉีดแล้ว"
+                        style="display:none;">
+                    <input type="submit" class="btn btn-outline-success" name="submit" value="อนุญาต">
                 </form>
-                <form action="delectvaccine.php" method="POST">
-                    <input type="text" class="btn btn-primary" name="id" value="" style="display:none;">
-                    <input type="submit" class="btn btn-primary" name="submit" value="ยกเลิกการจอง">
+                <?php } ?>
+                <?php if($row['v_dose1'] == "ฉีดแล้ว"){ ?>
+                        
+                <?php }else{?>
+                    <form action="delectvaccine.php" method="POST">
+                    <input type="text" class="btn btn-outline-danger" name="delect" value="<?= $row['v_id']?>"
+                        style="display:none;">
+                    <input type="submit" class="btn btn-outline-danger" name="submit" value="ยกเลิกการจอง">
                 </form>
+                    <?php }?>
             </td>
         </tr>
         <?php } ?>

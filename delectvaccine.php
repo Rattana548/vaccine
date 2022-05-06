@@ -5,7 +5,7 @@
     if($iduser ==''){
 
     }else{
-    $sql = "SELECT v_data.v_id,v_user.v_fname,v_vaccine.v_name,v_vaccine.v_effect,v_vaccine.v_minage,v_data.v_amount,v_data.date1,v_data.date2 FROM v_data INNER JOIN v_user ON v_data.v_iduser = v_user.v_id INNER JOIN v_vaccine ON v_data.v_idvaccine = v_vaccine.v_id WHERE v_user.v_id = '$iduser'";
+    $sql = "SELECT v_data.v_id,v_user.v_fname,v_vaccine.v_name,v_vaccine.v_effect,v_vaccine.v_minage,v_data.v_amount,v_data.date1,v_data.date2,v_data.v_dose1,v_data.v_dose2 FROM v_data INNER JOIN v_user ON v_data.v_iduser = v_user.v_id INNER JOIN v_vaccine ON v_data.v_idvaccine = v_vaccine.v_id WHERE v_user.v_id = '$iduser'";
     $query = mysqli_query($conn,$sql);
     $result = mysqli_fetch_array($query);
     }
@@ -47,7 +47,7 @@
             <th>จำนวนโดส</th>
             <th>วัน เข็ม 1</th>
             <th>วัน เข็ม 2</th>
-            <th>ตัวเลือก</th>
+            <th>เพิ่มเติม</th>
         </thead>
         <tr>
             <td><?= $result["v_fname"]?></td>
@@ -57,12 +57,15 @@
             <td><?= $result["v_amount"]?></td>
             <td><?= $result["date1"]?></td>
             <td><?= $result["date2"]?></td>
-            <td>
+            <td><?php if($result["v_dose1"] == "ฉีดแล้ว"){?>
+                สถานะเข็ม 1 <?= $result["v_dose1"]?> สถานะเข็ม 2 <?= $result["v_dose2"]?>
+            <?php }else{ ?>
                 <form action="delectvaccine.php" method="POST">
                     <input type="text" class="btn btn-primary" name="id" value="<?= $result["v_id"]?>"
                         style="display:none;">
                     <input type="submit" class="btn btn-primary" name="submit" value="ยกเลิกการจอง">
                 </form>
+                <?php } ?>
             </td>
         </tr>
     </table>

@@ -7,12 +7,9 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                            alt="image" class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3"><?= $_SESSION['fname']?></h5>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary"><a href="index.php?page=Register" style="color:var(--bs-white);">Edit</a></button>
-                            <button type="button" class="btn btn-outline-primary ms-1"><a href="" style="color:var(--bs-white);">Add image</a></button>
+                            
                         </div>
                     </div>
                 </div>
@@ -90,13 +87,11 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                            alt="image" class="rounded-circle img-fluid" style="width: 150px;">
+                        
                         <h5 class="my-3"><?= $_SESSION['fname']?></h5>
 
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary">Edit</button>
-                            <button type="button" class="btn btn-outline-primary ms-1">Add image</button>
+                           
                         </div>
                     </div>
                 </div>

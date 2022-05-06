@@ -6,7 +6,6 @@
   while($row = mysqli_fetch_array($query)) {
     $result_list[] = $row;
   }
-
   if(isset($_POST['submit'])){ 
     session_start();
     $_SESSION['statusdelectvaccine'] = true;
