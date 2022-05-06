@@ -2,6 +2,9 @@
 
     require_once "conn/conn.php";
     $iduser = $_SESSION['id'] ?? '';
+    if($_SESSION['status'] =="admin"){
+        
+    }
     if($iduser ==''){
 
     }else{

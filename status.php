@@ -79,7 +79,7 @@
 
 
 
-   <?php } ?>
+   <?php }else{ ?>
 
 <section style="background-color: #eee;min-height: 582px;">
     <div class="container py-5">
@@ -205,3 +205,4 @@
         </div>
     </div>
 </section>
+<?php } ?>

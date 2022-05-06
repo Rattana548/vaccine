@@ -44,7 +44,8 @@
             <td><?= $row['v_phone']?></td>
             <td><?= $row['v_password']?></td>
             <td><?= $row['v_status']?></td>
-            <td><form action="tableuser.php" method="POST">
+            <td>
+                <form action="tableuser.php" method="POST">
                     <input type="text" class="btn btn-outline-danger" name="delect" value="<?= $row['v_id']?>"
                         style="display:none;">
                     <input type="submit" class="btn btn-outline-danger" name="submit" value="ลบ">

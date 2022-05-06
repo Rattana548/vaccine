@@ -85,13 +85,13 @@ require_once "delectvaccine.php";
                 </button>
 
 
-                <?php }if($_SESSION["age"]<18){ ?>
+                <?php }else if($_SESSION["age"]<18){ ?>
 
                 <button type="button" class="btn btn-primary" disabled>
                     จอง
                 </button>
 
-                <?php }if($row["v_amount"] < 1){ ?>
+                <?php }else if($row["v_amount"] < 1){ ?>
 
 
                 <button type="button" class="btn btn-primary" disabled>

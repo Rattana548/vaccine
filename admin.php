@@ -8,6 +8,13 @@
     while($row = mysqli_fetch_array($query)) {
         $result_list[] = $row;
       }
+if(isset($_POST['delectvaccine'])){
+ $delect = $_POST['delect'];
+ $sql = "DELETE FROM `v_data` WHERE v_iduser = '$delect'";
+ $query = mysqli_query($conn,$sql);
+ header('refresh:1;url=../vaccine/index.php?page=admin');
+}else{
+    
 ?>
 
 
@@ -43,10 +50,10 @@
                     <input type="submit" class="btn btn-outline-success" name="submit" value="อนุญาต">
                 </form>
                 
-                <form action="delectvaccine.php" method="POST">
+                <form action="admin.php" method="POST">
                     <input type="text" class="btn btn-outline-danger" name="delect" value="<?= $row['v_id']?>"
                         style="display:none;">
-                    <input type="submit" class="btn btn-outline-danger" name="submit" value="ยกเลิกการจอง">
+                    <input type="submit" class="btn btn-outline-danger" name="delectvaccine" value="ยกเลิกการจอง">
                 </form>
                 <?php }?>
             </td>
@@ -66,10 +73,10 @@
                 <?php if($row['v_dose1'] == "ฉีดแล้ว"){ ?>
                         
                 <?php }else{?>
-                    <form action="delectvaccine.php" method="POST">
+                    <form action="admin.php.php" method="POST">
                     <input type="text" class="btn btn-outline-danger" name="delect" value="<?= $row['v_id']?>"
                         style="display:none;">
-                    <input type="submit" class="btn btn-outline-danger" name="submit" value="ยกเลิกการจอง">
+                    <input type="submit" class="btn btn-outline-danger" name="delectvaccine" value="ยกเลิกการจอง">
                 </form>
                     <?php }?>
             </td>
@@ -79,3 +86,4 @@
 
 
 </div>
+<?php }?>
